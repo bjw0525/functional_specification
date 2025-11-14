@@ -139,6 +139,7 @@
       </nav>
     </div>
   </footer>
+  <script src="assets/nav-scroll.js"></script>
   <script>
     (function () {
       const dropdown = document.querySelector('.top-nav details');
@@ -148,7 +149,12 @@
       if (!supportsHover) return;
 
       const summary = dropdown.querySelector('summary');
+      let closeTimer;
       const openDropdown = () => {
+        if (closeTimer) {
+          clearTimeout(closeTimer);
+          closeTimer = null;
+        }
         dropdown.dataset.hoverOpen = 'true';
         dropdown.setAttribute('open', '');
       };
@@ -156,9 +162,18 @@
         delete dropdown.dataset.hoverOpen;
         dropdown.removeAttribute('open');
       };
+      const scheduleClose = () => {
+        if (closeTimer) {
+          clearTimeout(closeTimer);
+        }
+        closeTimer = setTimeout(() => {
+          closeTimer = null;
+          closeDropdown();
+        }, 2000);
+      };
 
       dropdown.addEventListener('mouseenter', openDropdown);
-      dropdown.addEventListener('mouseleave', closeDropdown);
+      dropdown.addEventListener('mouseleave', scheduleClose);
 
       if (summary) {
         summary.addEventListener('click', event => {
