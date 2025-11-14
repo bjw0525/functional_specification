@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>홈/방문자 집계</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand"><a href="../index.html">Blog Spec</a></div>
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="../index.html">개요</a>
+        <a href="auth.html">인증/인가</a>
+        <a href="members.html">회원</a>
+        <a href="posts.html">게시글</a>
+        <a href="comments.html">댓글</a>
+        <a href="likes.html">좋아요</a>
+        <a href="stories.html">스토리</a>
+        <a href="notices.html">공지</a>
+        <a href="uploads.html">업로드 API</a>
+        <a class="active" href="analytics.html">홈/방문자</a>
+        <a href="settings.html">사이트 설정</a>
+        <a href="frontend.html">프론트엔드</a>
+        <a href="validation.html">유효성/에러</a>
+        <a href="security.html">보안/운영</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero"><div class="container"><h1>9. 홈/방문자 집계</h1><p class="muted">쿠키 기반 방문 카운트와 대시보드 데이터</p></div></div>
+  <main class="container">
+    <section>
+      <h2>방문자 카운트</h2>
+      <ul>
+        <li>하루 1회만 증가: <code>visited_today</code> 쿠키에 오늘 날짜 저장, 만료는 자정.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>대시보드 데이터</h2>
+      <ul>
+        <li>인기글/최신글, 최근 공지, 오늘/누적 방문자 수, 태그 목록, 소개글, 히어로 이미지 URL → <code>index</code> 템플릿에 모델로 전달.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="container footer">© Blog Project Spec</footer>
+</body>
+</html>

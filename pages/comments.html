@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>댓글</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand"><a href="../index.html">Blog Spec</a></div>
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="../index.html">개요</a>
+        <a href="auth.html">인증/인가</a>
+        <a href="members.html">회원</a>
+        <a href="posts.html">게시글</a>
+        <a class="active" href="comments.html">댓글</a>
+        <a href="likes.html">좋아요</a>
+        <a href="stories.html">스토리</a>
+        <a href="notices.html">공지</a>
+        <a href="uploads.html">업로드 API</a>
+        <a href="analytics.html">홈/방문자</a>
+        <a href="settings.html">사이트 설정</a>
+        <a href="frontend.html">프론트엔드</a>
+        <a href="validation.html">유효성/에러</a>
+        <a href="security.html">보안/운영</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero"><div class="container"><h1>4. 댓글</h1><p class="muted">CRUD, 작성자 검증, 좋아요(AJAX)</p></div></div>
+  <main class="container">
+    <section>
+      <h2>기능</h2>
+      <ul>
+        <li>생성: <code>POST /posts/{postId}/comments</code> (인증) — 작성자는 로그인 사용자명, 완료 후 상세 리다이렉트.</li>
+        <li>수정: <code>POST /comments/{commentId}/update</code> (인증) — 본인 검증 실패 시 <code>?error=...</code> 부여.</li>
+        <li>삭제: <code>POST /comments/{commentId}/delete</code> (인증).</li>
+        <li>댓글 좋아요: <code>POST /comments/{commentId}/like</code> (인증, AJAX) — 성공 시 카운트/텍스트 토글, 401 시 로그인 안내.</li>
+        <li>메시지 표시: 상세 상단에 <code>param.success</code>/<code>param.error</code> 알림 배너.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="container footer">© Blog Project Spec</footer>
+</body>
+</html>

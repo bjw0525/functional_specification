@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>파일 업로드 API</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand"><a href="../index.html">Blog Spec</a></div>
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="../index.html">개요</a>
+        <a href="auth.html">인증/인가</a>
+        <a href="members.html">회원</a>
+        <a href="posts.html">게시글</a>
+        <a href="comments.html">댓글</a>
+        <a href="likes.html">좋아요</a>
+        <a href="stories.html">스토리</a>
+        <a href="notices.html">공지</a>
+        <a class="active" href="uploads.html">업로드 API</a>
+        <a href="analytics.html">홈/방문자</a>
+        <a href="settings.html">사이트 설정</a>
+        <a href="frontend.html">프론트엔드</a>
+        <a href="validation.html">유효성/에러</a>
+        <a href="security.html">보안/운영</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero"><div class="container"><h1>8. 파일 업로드 API</h1><p class="muted">이미지 업로드와 임시 파일 정리</p></div></div>
+  <main class="container">
+    <section>
+      <h2>엔드포인트</h2>
+      <ul>
+        <li>이미지 업로드: <code>POST /api/uploads/image</code> (multipart 키 <code>file</code>, 최대 4MB) → <code>{"url":"/uploads/images/..."}</code>.</li>
+        <li>임시 정리: <code>POST /api/uploads/cleanup</code> 에 <code>usedImages</code> 전달 → 미사용 이미지 삭제, <code>{"deleted": n}</code> 반환.</li>
+        <li>경로: 서버 로컬 <code>uploads/images</code>, URL: <code>/uploads/images/...</code>.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="container footer">© Blog Project Spec</footer>
+</body>
+</html>

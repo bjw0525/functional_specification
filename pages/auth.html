@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>사용자 인증/인가</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand"><a href="../index.html">Blog Spec</a></div>
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="../index.html">개요</a>
+        <a class="active" href="auth.html">인증/인가</a>
+        <a href="members.html">회원</a>
+        <a href="posts.html">게시글</a>
+        <a href="comments.html">댓글</a>
+        <a href="likes.html">좋아요</a>
+        <a href="stories.html">스토리</a>
+        <a href="notices.html">공지</a>
+        <a href="uploads.html">업로드 API</a>
+        <a href="analytics.html">홈/방문자</a>
+        <a href="settings.html">사이트 설정</a>
+        <a href="frontend.html">프론트엔드</a>
+        <a href="validation.html">유효성/에러</a>
+        <a href="security.html">보안/운영</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero"><div class="container"><h1>1. 사용자 인증/인가</h1><p class="muted">Spring Security 폼 로그인과 세션 기반 인가</p></div></div>
+  <main class="container">
+    <section>
+      <h2>로그인/로그아웃</h2>
+      <ul>
+        <li>로그인: 이메일(=username) + 비밀번호, 폼 경로: <code>/member/signin</code>.</li>
+        <li>성공 시 기본 리다이렉트: <code>/</code>, 실패 시: <code>/member/signin?error</code>.</li>
+        <li>Remember‑Me 사용 시 14일 쿠키 발급.</li>
+        <li>로그아웃: <code>/member/signout</code> → 세션 무효화 + Remember‑Me 삭제 → <code>/?logout</code>.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>권한/인가</h2>
+      <ul>
+        <li>역할: <code>ROLE_USER</code>, <code>ROLE_ADMIN</code>.</li>
+        <li>글/스토리/공지 작성·수정·삭제 및 일부 관리 기능은 관리자만.</li>
+        <li>목록/상세 조회와 정적 리소스 접근은 익명 허용 경로를 명시.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>비밀번호 저장</h2>
+      <ul>
+        <li>개발: NoOpPasswordEncoder(평문) — 운영 전환 시 반드시 해시(BCrypt 등)로 교체.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="container footer">© Blog Project Spec</footer>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>게시글(Posts)</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand"><a href="../index.html">Blog Spec</a></div>
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="../index.html">개요</a>
+        <a href="auth.html">인증/인가</a>
+        <a href="members.html">회원</a>
+        <a class="active" href="posts.html">게시글</a>
+        <a href="comments.html">댓글</a>
+        <a href="likes.html">좋아요</a>
+        <a href="stories.html">스토리</a>
+        <a href="notices.html">공지</a>
+        <a href="uploads.html">업로드 API</a>
+        <a href="analytics.html">홈/방문자</a>
+        <a href="settings.html">사이트 설정</a>
+        <a href="frontend.html">프론트엔드</a>
+        <a href="validation.html">유효성/에러</a>
+        <a href="security.html">보안/운영</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero"><div class="container"><h1>3. 게시글(Posts)</h1><p class="muted">목록/검색/상세 및 작성/수정/삭제, 파일/이미지 업로드</p></div></div>
+  <main class="container">
+    <section>
+      <h2>기본 동작</h2>
+      <ul>
+        <li>목록: <code>GET /posts</code> — 페이지당 10개, 선택적 카테고리 필터, 요약은 HTML 제거.</li>
+        <li>검색: <code>GET /posts/search?field=title|content|tags&q=...</code>.</li>
+        <li>상세: <code>GET /posts/{id}</code> — 조회수 +1, 본문 외 첨부 분리, 최신글(5) 포함.</li>
+        <li>작성: <code>GET /posts/write</code>, 저장: <code>POST /posts/write</code> — 관리자 전용, 공개 여부 <code>isPublic</code>.</li>
+        <li>수정/삭제: <code>GET/POST /posts/edit/{id}</code>, <code>POST /posts/delete/{id}</code> — 관리자 전용.</li>
+        <li>파일/이미지: 본문 이미지(<code>/uploads/images/...</code>) 추출·정리, 일반 파일/동영상 URL/썸네일 함께 저장.</li>
+        <li>다운로드: 첨부 파일 다운로드 엔드포인트 <code>/posts/download</code>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>세부 흐름</h2>
+      <h3>목록(익명)</h3>
+      <ul>
+        <li>입력: <code>GET /posts</code> (옵션: <code>category</code>, <code>page</code>)</li>
+        <li>처리: 페이징 10개, HTML 제거 요약, 카테고리 탭 활성화</li>
+        <li>결과: <code>posts/list.html</code> 렌더, 페이지네이션</li>
+      </ul>
+      <h3>검색(익명)</h3>
+      <ul>
+        <li>입력: <code>GET /posts/search?field=title|content|tags&q=&page=</code></li>
+        <li>처리/결과: 목록과 동일 템플릿, 파라미터 유지</li>
+      </ul>
+      <h3>상세(익명)</h3>
+      <ul>
+        <li>입력: <code>GET /posts/{id}</code></li>
+        <li>처리: 조회수 +1, 첨부 분리, 최신글(5), 로그인 사용자의 좋아요 상태</li>
+        <li>결과: <code>posts/detail.html</code> 렌더, 공유/태그/다운로드/최신글</li>
+      </ul>
+      <h3>좋아요(AJAX, 인증)</h3>
+      <ul>
+        <li><code>POST /posts/{postId}/like</code> — 토글 후 <code>isLiked</code>, <code>likeCount</code> 반환, 401 처리 포함.</li>
+      </ul>
+      <h3>댓글(인증)</h3>
+      <ul>
+        <li>생성: <code>POST /posts/{postId}/comments</code> → 상세 리다이렉트</li>
+        <li>수정: <code>POST /comments/{commentId}/update</code> — 작성자 검증 실패 시 <code>?error=</code></li>
+        <li>삭제: <code>POST /comments/{commentId}/delete</code></li>
+        <li>댓글 좋아요: <code>POST /comments/{commentId}/like</code> — 카운트/텍스트 토글, 401 시 로그인 안내</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>작성/수정(관리자)</h2>
+      <ul>
+        <li>작성 입력: 제목/작성자/카테고리/태그/본문(라이브 프리뷰)/썸네일/파일/동영상 URL/공개 여부.</li>
+        <li>인라인 이미지 업로드: <code>/api/uploads/image</code> (최대 4MB) → 응답 URL을 본문 삽입, <code>imageUrls</code> hidden에 수집.</li>
+        <li>썸네일 지정: 본문 이미지 Hover → “썸네일” 버튼으로 <code>thumbnailUrl</code> 세팅(파일 입력 선택 시 미리보기 교체).</li>
+        <li>수정 기능: 본문 에디터, 이미지 정렬/재정렬, 서식(B/I/U/색상/폰트/정렬), 비디오/지도 삽입, 첨부 삭제 체크, 썸네일 교체/삭제.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>에디터/미디어/정리</h2>
+      <h3>에디터 툴바</h3>
+      <ul>
+        <li>프리뷰 <code>#livePreview</code>는 contenteditable, 숨김 <code>#content</code>와 실시간 동기화.</li>
+        <li>CSRF 메타(<code>_csrf</code>, <code>_csrf_header</code>)를 AJAX 업로드 헤더에 포함.</li>
+        <li>텍스트 서식: 굵게/이탤릭/밑줄, 글자색, 폰트/크기, 정렬.</li>
+        <li>구분선: <code>&lt;hr&gt;</code> 삽입.</li>
+        <li>비디오: YouTube는 iframe, MP4는 <code>&lt;video controls&gt;</code>.</li>
+        <li>지도: Kakao Maps SDK 동적 로드 → 지도 블록 삽입/미리보기.</li>
+      </ul>
+      <h3>커서/포커스</h3>
+      <ul>
+        <li>프리뷰 외 선택 시 끝으로 이동 후 삽입, 삽입 후 커서를 마지막 노드 뒤로 이동.</li>
+      </ul>
+      <h3>미디어 크기 조절 UX</h3>
+      <ul>
+        <li>공통 <code>resizable-media</code> — 드래그로 크기 조절, px 인디케이터.</li>
+        <li>이미지: 최소 100px, 에디터 폭 이하, 고정 폭 적용.</li>
+        <li>비디오: 16:9 비율 유지, 최소 200px.</li>
+        <li>지도: 가로 에디터 폭 이하, 세로 최소 200px.</li>
+      </ul>
+      <h3>임시 업로드 정리</h3>
+      <ul>
+        <li>수집: 인라인 업로드 URL을 hidden <code>imageUrls</code>와 <code>uploadedImages</code>(Set)로 추적.</li>
+        <li>저장: 제출 시 textarea를 최신 HTML로 싱크, 저장 후 <code>cleanupSent=true</code>.</li>
+        <li>이탈: <code>beforeunload</code> 시 업로드 이력 있고 미정리면 정리 요청(<code>sendBeacon</code> 또는 <code>keepalive</code> fetch).</li>
+        <li>취소: <code>isCancelling=true</code>로 표시 후 즉시 정리, 폼 제출 막음.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>화면 요건</h2>
+      <ul>
+        <li>목록: 카테고리 탭, 제목/작성자/요약/썸네일, 페이지네이션, 관리자만 “글쓰기”.</li>
+        <li>상세: 카테고리/제목/작성자/조회/좋아요, 본문/첨부/최신글, 공유 버튼, 댓글.</li>
+        <li>작성/수정: contenteditable 프리뷰, 이미지/비디오/지도 삽입, 썸네일 미리보기/삭제, 유효성/용량 제한/CSRF.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="container footer">© Blog Project Spec</footer>
+</body>
+</html>

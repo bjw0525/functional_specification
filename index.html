@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>블로그 프로젝트 기능 설명</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="portal">
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <a href="index.html" aria-label="Blog Spec">
+          <span class="brand-logo">B</span>
+          <span class="brand-text">Blog Spec</span>
+        </a>
+      </div>
+      <div class="top-nav">
+        <details>
+          <summary>전체 메뉴</summary>
+          <nav class="top-nav-menu" aria-label="주요 섹션">
+            <a class="active" href="index.html">개요</a>
+            <a href="pages/auth.html">인증/인가</a>
+            <a href="pages/members.html">회원</a>
+            <a href="pages/posts.html">게시글</a>
+            <a href="pages/comments.html">댓글</a>
+            <a href="pages/likes.html">좋아요</a>
+            <a href="pages/stories.html">스토리</a>
+            <a href="pages/notices.html">공지</a>
+            <a href="pages/uploads.html">업로드 API</a>
+            <a href="pages/analytics.html">홈/방문자</a>
+            <a href="pages/settings.html">사이트 설정</a>
+            <a href="pages/frontend.html">프론트엔드</a>
+            <a href="pages/validation.html">유효성/에러</a>
+            <a href="pages/security.html">보안/운영</a>
+          </nav>
+        </details>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="search-section">
+      <div class="container">
+        <div class="search-panel">
+          <div class="search-title">
+            <h1>블로그 프로젝트 기능 검색</h1>
+            <p>필요한 기능 명세를 바로 찾아보세요.</p>
+          </div>
+          <form class="search-form" role="search">
+            <label class="visually-hidden" for="global-search">기능 검색</label>
+            <input id="global-search" type="search" placeholder="예) 인증, 게시글 작성, 파일 업로드..." />
+            <button type="submit">검색</button>
+          </form>
+          <div class="quick-tags">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="portal-nav">
+      <div class="container nav-wrapper">
+        <div class="nav-block">
+          <div class="nav-block-header">
+            <h2>주요 서비스</h2>
+            <a href="pages/posts.html">전체 보기</a>
+          </div>
+          <nav class="nav-grid" aria-label="주요 서비스">
+            <a href="pages/auth.html">
+              <strong>사용자 인증/인가</strong>
+              <span>로그인, Remember‑Me, 권한 정책</span>
+            </a>
+            <a href="pages/posts.html">
+              <strong>게시글 관리</strong>
+              <span>CRUD, 에디터, 업로드, 좋아요</span>
+            </a>
+            <a href="pages/analytics.html">
+              <strong>홈/방문자</strong>
+              <span>쿠키 기반 방문 집계, 대시보드</span>
+            </a>
+            <a href="pages/stories.html">
+              <strong>스토리</strong>
+              <span>카드 리스트, 동영상, 관리자 모드</span>
+            </a>
+          </nav>
+        </div>
+
+        <div class="nav-block">
+          <div class="nav-block-header">
+            <h2>섹션 바로가기</h2>
+          </div>
+          <nav class="nav-table" aria-label="섹션 바로가기">
+            <ol>
+              <li><a href="pages/auth.html">사용자 인증/인가</a></li>
+              <li><a href="pages/members.html">회원 관리</a></li>
+              <li><a href="pages/posts.html">게시글(Posts)</a></li>
+              <li><a href="pages/comments.html">댓글</a></li>
+              <li><a href="pages/likes.html">좋아요</a></li>
+              <li><a href="pages/stories.html">스토리</a></li>
+              <li><a href="pages/notices.html">공지사항</a></li>
+            </ol>
+            <ol start="8">
+              <li><a href="pages/uploads.html">파일 업로드 API</a></li>
+              <li><a href="pages/analytics.html">홈/방문자 집계</a></li>
+              <li><a href="pages/settings.html">사이트 설정</a></li>
+              <li><a href="pages/frontend.html">프론트엔드/템플릿</a></li>
+              <li><a href="pages/validation.html">유효성/에러 처리</a></li>
+              <li><a href="pages/security.html">보안/운영 고려</a></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="container summary">
+      <div class="summary-card">
+        <h2>프로젝트 요약</h2>
+        <p>PROJECT_SPECIFICATION.md 및 실제 구현을 토대로 사용자 흐름 전반을 정리했습니다.</p>
+        <ul>
+          <li>Spring Security 기반 세션 인증/권한과 Remember‑Me.</li>
+          <li>게시글·스토리·공지 전체 CRUD + 좋아요/댓글.</li>
+          <li>이미지/파일 업로드, 임시 파일 정리, 다운로드.</li>
+          <li>대시보드 방문 집계, 태그/소개/히어로 관리.</li>
+        </ul>
+      </div>
+      <div class="notice-card">
+        <h3>공지 & 업데이트</h3>
+        <ul>
+          <li><span>2025.11</span> 기능 명세 초안 업데이트.</li>
+          <li><span>2025.10</span> 업로드 정리 로직 보강.</li>
+          <li><span>2025.09</span> 방문자 집계 개선.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="portal-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Blog Spec</strong>
+        <p>© Blog Project Spec</p>
+      </div>
+      <nav>
+        <a href="pages/notices.html">공지</a>
+        <a href="pages/security.html">보안</a>
+        <a href="pages/settings.html">설정</a>
+      </nav>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      const form = document.querySelector('.search-form');
+      const input = document.getElementById('global-search');
+      if (!form || !input) return;
+
+      const pages = [
+        { url: 'pages/auth.html', keywords: ['인증', 'auth', '로그인', 'remember', '권한'] },
+        { url: 'pages/members.html', keywords: ['회원', 'member', '가입', '탈퇴', '프로필'] },
+        { url: 'pages/posts.html', keywords: ['게시글', 'post', '글쓰기', '에디터', 'crud'] },
+        { url: 'pages/comments.html', keywords: ['댓글', 'comment'] },
+        { url: 'pages/likes.html', keywords: ['좋아요', 'like'] },
+        { url: 'pages/stories.html', keywords: ['스토리', 'story'] },
+        { url: 'pages/notices.html', keywords: ['공지', 'notice'] },
+        { url: 'pages/uploads.html', keywords: ['업로드', 'upload', '파일', '이미지'] },
+        { url: 'pages/analytics.html', keywords: ['방문자', 'analytics', '대시보드', '홈'] },
+        { url: 'pages/settings.html', keywords: ['설정', 'settings', '태그'] },
+        { url: 'pages/frontend.html', keywords: ['프론트', 'frontend', '템플릿'] },
+        { url: 'pages/validation.html', keywords: ['유효성', 'validation', '에러'] },
+        { url: 'pages/security.html', keywords: ['보안', 'security', '운영'] }
+      ];
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const query = input.value.trim().toLowerCase();
+        if (!query) {
+          input.focus();
+          return;
+        }
+
+        const matched = pages.find(page =>
+          page.keywords.some(keyword =>
+            keyword.toLowerCase().includes(query) || query.includes(keyword.toLowerCase())
+          )
+        );
+
+        if (matched) {
+          window.location.href = matched.url;
+        } else {
+          alert('검색 결과가 없습니다. 다른 키워드로 시도해 보세요.');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

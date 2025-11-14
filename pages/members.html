@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>회원 관리</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand"><a href="../index.html">Blog Spec</a></div>
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="../index.html">개요</a>
+        <a href="auth.html">인증/인가</a>
+        <a class="active" href="members.html">회원</a>
+        <a href="posts.html">게시글</a>
+        <a href="comments.html">댓글</a>
+        <a href="likes.html">좋아요</a>
+        <a href="stories.html">스토리</a>
+        <a href="notices.html">공지</a>
+        <a href="uploads.html">업로드 API</a>
+        <a href="analytics.html">홈/방문자</a>
+        <a href="settings.html">사이트 설정</a>
+        <a href="frontend.html">프론트엔드</a>
+        <a href="validation.html">유효성/에러</a>
+        <a href="security.html">보안/운영</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero"><div class="container"><h1>2. 회원 관리</h1><p class="muted">가입/수정/탈퇴와 관리자 기능</p></div></div>
+  <main class="container">
+    <section>
+      <h2>회원가입</h2>
+      <ul>
+        <li><code>POST /member/signup</code>에서 username(이메일), password, nickname, email, phoneNumber, address 저장.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>회원정보 조회/수정</h2>
+      <ul>
+        <li>인증 사용자만 <code>/member/update</code> 접근.</li>
+        <li>현재 비밀번호 검증 후 이메일/연락처/주소 변경, 비밀번호는 입력 시에만 변경.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>회원탈퇴</h2>
+      <ul>
+        <li><code>POST /member/delete</code> 시 계정 삭제 → 세션 무효화/Remember‑Me 삭제 → <code>/?accountDeleted</code>.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>관리자 기능</h2>
+      <ul>
+        <li>태그 관리 <code>/member/tag-update</code>, 소개글 관리 <code>/member/introduction-update</code> — 관리자만.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="container footer">© Blog Project Spec</footer>
+</body>
+</html>

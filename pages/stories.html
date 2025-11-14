@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>스토리(Stories)</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="brand"><a href="../index.html">Blog Spec</a></div>
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="../index.html">개요</a>
+        <a href="auth.html">인증/인가</a>
+        <a href="members.html">회원</a>
+        <a href="posts.html">게시글</a>
+        <a href="comments.html">댓글</a>
+        <a href="likes.html">좋아요</a>
+        <a class="active" href="stories.html">스토리</a>
+        <a href="notices.html">공지</a>
+        <a href="uploads.html">업로드 API</a>
+        <a href="analytics.html">홈/방문자</a>
+        <a href="settings.html">사이트 설정</a>
+        <a href="frontend.html">프론트엔드</a>
+        <a href="validation.html">유효성/에러</a>
+        <a href="security.html">보안/운영</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero"><div class="container"><h1>6. 스토리(Stories)</h1><p class="muted">목록/상세/검색 및 작성/수정/삭제</p></div></div>
+  <main class="container">
+    <section>
+      <h2>동작</h2>
+      <ul>
+        <li>조회: 목록/상세/검색은 익명 허용.</li>
+        <li>작성/수정/삭제: 관리자 전용.</li>
+        <li>좋아요/댓글: 게시글과 동일 패턴, 인증 필요.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>세부 흐름</h2>
+      <h3>목록</h3>
+      <ul>
+        <li><code>GET /stories</code> — 카드 그리드(썸네일/비디오/배지/제목/요약/조회/좋아요), 페이지네이션.</li>
+      </ul>
+      <h3>검색</h3>
+      <ul>
+        <li><code>GET /stories/search?field=title|content|tags&q=&page=</code> — 목록과 동일 템플릿.</li>
+      </ul>
+      <h3>상세</h3>
+      <ul>
+        <li><code>GET /stories/{id}</code> — 비디오 있으면 플레이어, 없으면 썸네일, 태그/좋아요 상태.</li>
+      </ul>
+      <h3>작성/수정/삭제(관리자)</h3>
+      <ul>
+        <li>작성: <code>GET/POST /stories/write</code> — 제목/작성자/카테고리/태그/설명, 썸네일(10MB), 동영상 필수(100MB).</li>
+        <li>수정: <code>GET/POST /stories/edit/{id}</code> — 메타 변경, 썸네일/동영상 교체.</li>
+        <li>삭제: <code>POST /stories/delete/{id}</code> — 확인 다이얼로그.</li>
+      </ul>
+      <h3>화면 요건</h3>
+      <ul>
+        <li>목록: 카테고리 탭, 카드(썸네일/비디오), 페이지네이션, 관리자 “글쓰기”.</li>
+        <li>상세: 헤더(카테고리/제목/작성자/조회/좋아요), 본문/태그, 액션/댓글.</li>
+        <li>작성/수정: 필수값 검증, 미디어 프리뷰, CSRF.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="container footer">© Blog Project Spec</footer>
+</body>
+</html>
