@@ -123,14 +123,6 @@
           <li>대시보드 방문 집계, 태그/소개/히어로 관리.</li>
         </ul>
       </div>
-      <div class="notice-card">
-        <h3>공지 & 업데이트</h3>
-        <ul>
-          <li><span>2025.11</span> 기능 명세 초안 업데이트.</li>
-          <li><span>2025.10</span> 업로드 정리 로직 보강.</li>
-          <li><span>2025.09</span> 방문자 집계 개선.</li>
-        </ul>
-      </div>
     </section>
   </main>
 
@@ -148,6 +140,35 @@
     </div>
   </footer>
   <script>
+    (function () {
+      const dropdown = document.querySelector('.top-nav details');
+      if (!dropdown || !window.matchMedia) return;
+
+      const supportsHover = window.matchMedia('(hover: hover)').matches;
+      if (!supportsHover) return;
+
+      const summary = dropdown.querySelector('summary');
+      const openDropdown = () => {
+        dropdown.dataset.hoverOpen = 'true';
+        dropdown.setAttribute('open', '');
+      };
+      const closeDropdown = () => {
+        delete dropdown.dataset.hoverOpen;
+        dropdown.removeAttribute('open');
+      };
+
+      dropdown.addEventListener('mouseenter', openDropdown);
+      dropdown.addEventListener('mouseleave', closeDropdown);
+
+      if (summary) {
+        summary.addEventListener('click', event => {
+          if (dropdown.dataset.hoverOpen === 'true') {
+            event.preventDefault();
+          }
+        });
+      }
+    })();
+
     (function () {
       const form = document.querySelector('.search-form');
       const input = document.getElementById('global-search');
