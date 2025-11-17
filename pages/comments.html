@@ -29,9 +29,19 @@
     </div>
   </header>
 
-  <div class="hero"><div class="container"><h1>4. 댓글</h1><p class="muted">CRUD, 작성자 검증, 좋아요(AJAX)</p></div></div>
+  <div class="hero hero-with-image">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <h1>4. 댓글</h1>
+        <p class="muted">CRUD, 작성자 검증, 좋아요(AJAX)</p>
+      </div>
+      <figure class="hero-figure">
+        <img src="../docs/images/hero-presenter.png" alt="댓글 기능을 소개하는 프레젠터" loading="lazy" />
+      </figure>
+    </div>
+  </div>
   <main class="container">
-    <section>
+    <section class="spec-card">
       <h2>기능</h2>
       <ul>
         <li>생성: <code>POST /posts/{postId}/comments</code> (인증) — 작성자는 로그인 사용자명, 완료 후 상세 리다이렉트.</li>
@@ -45,6 +55,7 @@
   <footer class="container footer">© Blog Project Spec</footer>
 
   <script src='../assets/nav-scroll.js'></script>
+  <script src="../assets/spec-reveal.js"></script>
 </body>
 </html>
 

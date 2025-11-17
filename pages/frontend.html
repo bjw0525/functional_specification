@@ -29,16 +29,26 @@
     </div>
   </header>
 
-  <div class="hero"><div class="container"><h1>11. 프론트엔드/템플릿</h1><p class="muted">Thymeleaf, 정적 리소스, Kakao 지도</p></div></div>
+  <div class="hero hero-with-image">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <h1>11. 프론트엔드/템플릿</h1>
+        <p class="muted">Thymeleaf, 정적 리소스, Kakao 지도</p>
+      </div>
+      <figure class="hero-figure">
+        <img src="../docs/images/hero-presenter.png" alt="프론트엔드 요구를 안내하는 프레젠터" loading="lazy" />
+      </figure>
+    </div>
+  </div>
   <main class="container">
-    <section>
+    <section class="spec-card">
       <h2>템플릿/리소스</h2>
       <ul>
         <li>Thymeleaf 기반 템플릿, 보안 태그(Sec)로 인증/권한별 UI 제어.</li>
         <li>정적 리소스: <code>/css/**</code>, <code>/js/**</code>, <code>/images/**</code>, <code>/uploads/**</code> — 익명 허용.</li>
       </ul>
     </section>
-    <section>
+    <section class="spec-card">
       <h2>Kakao 지도</h2>
       <ul>
         <li>게시글 작성/수정/상세에서 Kakao Maps JS SDK 사용, 키는 <code>application.properties</code>에서 주입.</li>
@@ -48,6 +58,7 @@
   <footer class="container footer">© Blog Project Spec</footer>
 
   <script src='../assets/nav-scroll.js'></script>
+  <script src="../assets/spec-reveal.js"></script>
 </body>
 </html>
 

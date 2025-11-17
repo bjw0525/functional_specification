@@ -29,9 +29,19 @@
     </div>
   </header>
 
-  <div class="hero"><div class="container"><h1>3. 게시글(Posts)</h1><p class="muted">목록/검색/상세 및 작성/수정/삭제, 파일/이미지 업로드</p></div></div>
+  <div class="hero hero-with-image">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <h1>3. 게시글(Posts)</h1>
+        <p class="muted">목록/검색/상세 및 작성/수정/삭제, 파일/이미지 업로드</p>
+      </div>
+      <figure class="hero-figure">
+        <img src="../docs/images/hero-presenter.png" alt="블로그 게시글 기능을 설명하는 프레젠터" loading="lazy" />
+      </figure>
+    </div>
+  </div>
   <main class="container">
-    <section>
+    <section class="spec-card">
       <h2>기본 동작</h2>
       <ul>
         <li>목록: <code>GET /posts</code> — 페이지당 10개, 선택적 카테고리 필터, 요약은 HTML 제거.</li>
@@ -44,7 +54,7 @@
       </ul>
     </section>
 
-    <section>
+    <section class="spec-card">
       <h2>세부 흐름</h2>
       <h3>목록(익명)</h3>
       <ul>
@@ -76,7 +86,7 @@
       </ul>
     </section>
 
-    <section>
+    <section class="spec-card">
       <h2>작성/수정(관리자)</h2>
       <ul>
         <li>작성 입력: 제목/작성자/카테고리/태그/본문(라이브 프리뷰)/썸네일/파일/동영상 URL/공개 여부.</li>
@@ -86,7 +96,7 @@
       </ul>
     </section>
 
-    <section>
+    <section class="spec-card">
       <h2>에디터/미디어/정리</h2>
       <h3>에디터 툴바</h3>
       <ul>
@@ -117,7 +127,7 @@
       </ul>
     </section>
 
-    <section>
+    <section class="spec-card">
       <h2>화면 요건</h2>
       <ul>
         <li>목록: 카테고리 탭, 제목/작성자/요약/썸네일, 페이지네이션, 관리자만 “글쓰기”.</li>
@@ -129,6 +139,7 @@
   <footer class="container footer">© Blog Project Spec</footer>
 
   <script src='../assets/nav-scroll.js'></script>
+  <script src="../assets/spec-reveal.js"></script>
 </body>
 </html>
 

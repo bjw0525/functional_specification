@@ -29,9 +29,19 @@
     </div>
   </header>
 
-  <div class="hero"><div class="container"><h1>8. 파일 업로드 API</h1><p class="muted">이미지 업로드와 임시 파일 정리</p></div></div>
+  <div class="hero hero-with-image">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <h1>8. 파일 업로드 API</h1>
+        <p class="muted">이미지 업로드와 임시 파일 정리</p>
+      </div>
+      <figure class="hero-figure">
+        <img src="../docs/images/hero-presenter.png" alt="업로드 API를 설명하는 프레젠터" loading="lazy" />
+      </figure>
+    </div>
+  </div>
   <main class="container">
-    <section>
+    <section class="spec-card">
       <h2>엔드포인트</h2>
       <ul>
         <li>이미지 업로드: <code>POST /api/uploads/image</code> (multipart 키 <code>file</code>, 최대 4MB) → <code>{"url":"/uploads/images/..."}</code>.</li>
@@ -43,6 +53,7 @@
   <footer class="container footer">© Blog Project Spec</footer>
 
   <script src='../assets/nav-scroll.js'></script>
+  <script src="../assets/spec-reveal.js"></script>
 </body>
 </html>
 

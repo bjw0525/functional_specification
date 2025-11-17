@@ -29,15 +29,25 @@
     </div>
   </header>
 
-  <div class="hero"><div class="container"><h1>9. 홈/방문자 집계</h1><p class="muted">쿠키 기반 방문 카운트와 대시보드 데이터</p></div></div>
+  <div class="hero hero-with-image">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <h1>9. 홈/방문자 집계</h1>
+        <p class="muted">쿠키 기반 방문 카운트와 대시보드 데이터</p>
+      </div>
+      <figure class="hero-figure">
+        <img src="../docs/images/hero-presenter.png" alt="방문자 집계를 설명하는 프레젠터" loading="lazy" />
+      </figure>
+    </div>
+  </div>
   <main class="container">
-    <section>
+    <section class="spec-card">
       <h2>방문자 카운트</h2>
       <ul>
         <li>하루 1회만 증가: <code>visited_today</code> 쿠키에 오늘 날짜 저장, 만료는 자정.</li>
       </ul>
     </section>
-    <section>
+    <section class="spec-card">
       <h2>대시보드 데이터</h2>
       <ul>
         <li>인기글/최신글, 최근 공지, 오늘/누적 방문자 수, 태그 목록, 소개글, 히어로 이미지 URL → <code>index</code> 템플릿에 모델로 전달.</li>
@@ -47,6 +57,7 @@
   <footer class="container footer">© Blog Project Spec</footer>
 
   <script src='../assets/nav-scroll.js'></script>
+  <script src="../assets/spec-reveal.js"></script>
 </body>
 </html>
 

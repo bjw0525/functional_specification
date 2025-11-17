@@ -2,43 +2,53 @@
   const navs = document.querySelectorAll('.nav');
   if (!navs.length) return;
 
-  const isScrollable = element => element.scrollWidth > element.clientWidth;
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
   navs.forEach(nav => {
-    let dragging = false;
-    let startX = 0;
-    let startScroll = 0;
+    if (nav.dataset.mouseScroll === 'ready') {
+      return;
+    }
 
-    const stopDragging = () => {
-      if (!dragging) return;
-      dragging = false;
-      nav.classList.remove('is-dragging');
+    let rafId = null;
+    let targetScroll = nav.scrollLeft;
+    let currentScroll = nav.scrollLeft;
+
+    const maxScroll = () => nav.scrollWidth - nav.clientWidth;
+
+    const animate = () => {
+      const difference = targetScroll - currentScroll;
+      if (Math.abs(difference) < 0.5) {
+        nav.scrollLeft = targetScroll;
+        rafId = null;
+        return;
+      }
+      currentScroll += difference * 0.15;
+      nav.scrollLeft = currentScroll;
+      rafId = requestAnimationFrame(animate);
     };
 
-    nav.addEventListener('pointerdown', event => {
-      if (!isScrollable(nav)) return;
-      dragging = true;
-      startX = event.clientX;
-      startScroll = nav.scrollLeft;
-      nav.classList.add('is-dragging');
-      nav.setPointerCapture?.(event.pointerId);
-    });
+    const handlePointer = event => {
+      if (maxScroll() <= 0) return;
+      const rect = nav.getBoundingClientRect();
+      const ratio = clamp((event.clientX - rect.left) / rect.width, 0, 1);
+      targetScroll = maxScroll() * ratio;
+      if (!rafId) {
+        currentScroll = nav.scrollLeft;
+        rafId = requestAnimationFrame(animate);
+      }
+    };
 
-    nav.addEventListener('pointermove', event => {
-      if (!dragging) return;
-      const delta = event.clientX - startX;
-      nav.scrollLeft = startScroll - delta;
-    });
+    const cancelAnimation = () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    };
 
-    nav.addEventListener('pointerup', stopDragging);
-    nav.addEventListener('pointerleave', stopDragging);
-    nav.addEventListener('pointercancel', stopDragging);
+    nav.addEventListener('mousemove', handlePointer);
+    nav.addEventListener('mouseenter', handlePointer);
+    nav.addEventListener('mouseleave', cancelAnimation);
 
-    nav.addEventListener('wheel', event => {
-      if (!isScrollable(nav)) return;
-      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-      nav.scrollLeft += event.deltaY;
-      event.preventDefault();
-    }, { passive: false });
+    nav.dataset.mouseScroll = 'ready';
   });
 })();

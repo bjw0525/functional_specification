@@ -29,9 +29,19 @@
     </div>
   </header>
 
-  <div class="hero"><div class="container"><h1>6. 스토리(Stories)</h1><p class="muted">목록/상세/검색 및 작성/수정/삭제</p></div></div>
+  <div class="hero hero-with-image">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <h1>6. 스토리(Stories)</h1>
+        <p class="muted">목록/상세/검색 및 작성/수정/삭제</p>
+      </div>
+      <figure class="hero-figure">
+        <img src="../docs/images/hero-presenter.png" alt="스토리 기능을 안내하는 프레젠터" loading="lazy" />
+      </figure>
+    </div>
+  </div>
   <main class="container">
-    <section>
+    <section class="spec-card">
       <h2>동작</h2>
       <ul>
         <li>조회: 목록/상세/검색은 익명 허용.</li>
@@ -39,7 +49,7 @@
         <li>좋아요/댓글: 게시글과 동일 패턴, 인증 필요.</li>
       </ul>
     </section>
-    <section>
+    <section class="spec-card">
       <h2>세부 흐름</h2>
       <h3>목록</h3>
       <ul>
@@ -70,6 +80,7 @@
   <footer class="container footer">© Blog Project Spec</footer>
 
   <script src='../assets/nav-scroll.js'></script>
+  <script src="../assets/spec-reveal.js"></script>
 </body>
 </html>
 
