@@ -238,13 +238,13 @@ a { color: inherit; text-decoration: none; }
 .nav-table a:hover { color: var(--accent); }
 
 .summary {
-  padding: 24px 20px 0;
+  padding: 24px 20px 24px;
 }
 .summary-card {
   background: #fff;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  padding: 24px;
+  padding: 28px 32px;
   box-shadow: var(--shadow);
 }
 .summary-card h2 { margin-top: 0; }
