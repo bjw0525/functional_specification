@@ -18,3 +18,24 @@
 
   cards.forEach(card => observer.observe(card));
 })();
+
+(function () {
+  const hero = document.querySelector('.hero-with-image');
+  if (!hero) return;
+
+  const reveal = () => hero.classList.add('hero-visible');
+  if (!('IntersectionObserver' in window)) {
+    reveal();
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      reveal();
+      observer.disconnect();
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(hero);
+})();
