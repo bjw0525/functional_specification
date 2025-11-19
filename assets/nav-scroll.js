@@ -28,6 +28,9 @@
     };
 
     const handlePointer = event => {
+      if (event.buttons > 0) {
+        return;
+      }
       if (maxScroll() <= 0) return;
       const rect = nav.getBoundingClientRect();
       const ratio = clamp((event.clientX - rect.left) / rect.width, 0, 1);
