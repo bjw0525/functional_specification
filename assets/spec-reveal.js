@@ -23,60 +23,92 @@
   const navs = document.querySelectorAll('.nav');
   if (!navs.length) return;
 
+  const normalizePath = path => {
+    if (!path) return '/';
+    return path
+      .toLowerCase()
+      .replace(/\\/g, '/')
+      .replace(/index\.html$/, '')
+      .replace(/\/+$/, '') || '/';
+  };
+  const currentPath = normalizePath(window.location.pathname);
+
   navs.forEach(nav => {
     const items = Array.from(nav.querySelectorAll('a'));
     if (!items.length) return;
 
-    let indicator = nav.querySelector('.nav-indicator');
-    if (!indicator) {
-      indicator = document.createElement('span');
-      indicator.className = 'nav-indicator';
-      nav.appendChild(indicator);
-    }
+    // ensure consistent class naming
+    items.forEach(item => item.classList.add('nav-item'));
+
+    // determine current page
+    let matched = false;
+    items.forEach(item => {
+      const href = item.getAttribute('href') || '';
+      const normalized = normalizePath(new URL(href, window.location.href).pathname);
+      item.classList.remove('active');
+      if (!matched && normalized === currentPath) {
+        item.classList.add('active');
+        matched = true;
+      }
+    });
 
     const defaultColor = getComputedStyle(document.documentElement)
       .getPropertyValue('--accent')
       .trim() || '#03c75a';
 
-    let currentTarget = null;
-    const updatePosition = () => {
-      if (!currentTarget) return;
-      const color = currentTarget.dataset.activeColor || defaultColor;
-      indicator.style.width = `${currentTarget.offsetWidth}px`;
-      indicator.style.left = `${currentTarget.offsetLeft - nav.scrollLeft}px`;
-      indicator.style.backgroundColor = color;
+    const focusNavOn = target => {
+      if (!target) return;
+      const navWidth = nav.clientWidth;
+      const targetCenter = target.offsetLeft + target.offsetWidth / 2;
+      const desiredScroll = Math.max(0, targetCenter - navWidth / 2);
+      if (typeof nav.scrollTo === 'function') {
+        nav.scrollTo({ left: desiredScroll, behavior: 'smooth' });
+      } else {
+        nav.scrollLeft = desiredScroll;
+      }
     };
 
     const handleIndicator = target => {
       if (!target) return;
-      currentTarget = target;
       items.forEach(item => {
         item.classList.remove('nav-is-active');
         item.style.removeProperty('color');
       });
-      const color = target.dataset.activeColor || defaultColor;
-      updatePosition();
       target.classList.add('nav-is-active');
-      target.style.color = color;
+      target.style.color = target.dataset.activeColor || defaultColor;
     };
 
-    nav.addEventListener('scroll', updatePosition);
-    window.addEventListener('resize', updatePosition);
+    let baseActive = nav.querySelector('a.active') || items[0];
+    const resetToBase = () => {
+      if (!baseActive) return;
+      handleIndicator(baseActive);
+      focusNavOn(baseActive);
+    };
 
     items.forEach(item => {
       if (!item.dataset.activeColor) {
         item.dataset.activeColor = defaultColor;
       }
+      item.addEventListener('click', event => {
+        event.preventDefault();
+        baseActive = item;
+        handleIndicator(item);
+        const href = item.getAttribute('href');
+        if (href) window.location.href = href;
+      });
       item.addEventListener('mouseenter', () => handleIndicator(item));
       item.addEventListener('focus', () => handleIndicator(item));
-      if (item.classList.contains('active')) {
-        handleIndicator(item);
-      }
+      item.addEventListener('mouseleave', resetToBase);
+      item.addEventListener('blur', resetToBase);
     });
 
-    if (!nav.querySelector('a.active')) {
-      handleIndicator(items[0]);
+    if (!baseActive) {
+      baseActive = items[0];
     }
+
+    resetToBase();
+    nav.addEventListener('scroll', resetToBase);
+    window.addEventListener('resize', resetToBase);
   });
 })();
 
